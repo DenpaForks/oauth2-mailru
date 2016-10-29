@@ -31,6 +31,16 @@ class Mailru extends AbstractProvider
     }
 
     /**
+     * Get default scopes
+     *
+     * @return array
+     */
+    protected function getDefaultScopes()
+    {
+        return [];
+    }
+
+    /**
      * Check a provider response for errors.
      *
      * @throws IdentityProviderException
