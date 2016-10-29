@@ -6,11 +6,24 @@
         {
             "name": "Alexey Rakeev",
             "email": "alexey@rakeev.name"
-        }
+        },
+		{
+			"name": "Denis Paavilainen",
+			"email": "denpa@netfleet.space"
+		}
     ],
+    "keywords": [
+        "oauth",
+        "oauth2",
+        "client",
+        "authorization",
+        "authorisation",
+        "mail.ru",
+		"mru"
+	],
     "require": {
-        "php": "~5.4",
-        "league/oauth2-client": "~0.5"
+        "php": ">=5.5.0",
+		"league/oauth2-client": "~1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.3"
