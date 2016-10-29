@@ -25,7 +25,7 @@ class Mailru extends AbstractProvider
      *
      * @return string
      */
-    public function getBaseAccessTokenUrl()
+    public function getBaseAccessTokenUrl(array $params)
     {
         return 'https://connect.mail.ru/oauth/token';
     }
