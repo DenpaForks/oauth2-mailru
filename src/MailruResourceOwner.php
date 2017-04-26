@@ -12,6 +12,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
      * @var array
      */
     protected $response;
+
     /**
      * Creates new resource owner.
      *
@@ -21,6 +22,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
     {
         $this->response = $response[0];
     }
+
     /**
      * Get user id
      *
@@ -30,6 +32,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
     {
         return $this->response['uid'] ?: null;
     }
+
     /**
      * Get user email
      *
@@ -39,6 +42,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
     {
         return $this->response['email'] ?: null;
     }
+
     /**
      * Get user firstname
      *
@@ -48,6 +52,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
     {
         return $this->response['first_name'] ?: null;
     }
+
     /**
      * Get user lastname
      *
@@ -57,6 +62,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
     {
         return $this->response['last_name'] ?: null;
     }
+
     /**
      * Get user image
      *
@@ -66,6 +72,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
     {
         return $this->response['pic_big'] ?: null;
     }
+
     /**
      * Get user nickname
      *
@@ -75,6 +82,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
     {
         return $this->response['nick'] ?: null;
     }
+
     /**
      * Get user sex
      *
@@ -84,6 +92,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
     {
         return ($this->response['sex'] == '0' ? 'male' : 'female');
     }
+
     /**
      * Get user birthday
      *
@@ -93,6 +102,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
     {
         return $this->response['birthday'] ?: null;
     }
+
     /**
      * Get user link
      *
@@ -102,6 +112,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
     {
         return $this->response['link'] ?: null;
     }
+
     /**
      * Get user status
      *
@@ -111,6 +122,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
     {
         return ( $this->response['online'] == 1 ? 'online' : 'offline' );
     }
+
     /**
      * Get user friends count
      *
@@ -120,6 +132,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
     {
         return $this->response['friends_count'] ?: null;
     }
+
     /**
      * Get user verification status
      *
@@ -129,6 +142,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
     {
         return ( $this->response['online'] == 1 ? 'verified' : 'unverified' );
     }
+
     /**
      * Get user vip status
      *
@@ -138,6 +152,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
     {
         return $this->response['vip'] ?: null;
     }
+
     /**
      * Get user location
      *
@@ -147,6 +162,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
     {
         return $this->response['location'] ?: null;
     }
+
     /**
      * Get user country
      *
@@ -156,6 +172,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
     {
         return $this->response['location']['country']['name'] ?: null;
     }
+
     /**
      * Get user city
      *
@@ -165,6 +182,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
     {
         return $this->response['location']['city']['name'] ?: null;
     }
+
     /**
      * Get user region
      *
@@ -174,6 +192,7 @@ class MailruResourceOwner implements ResourceOwnerInterface
     {
         return $this->response['location']['region']['name'] ?: null;
     }
+
     /**
      * Return all of the owner details available as an array.
      *

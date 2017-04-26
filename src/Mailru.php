@@ -10,20 +10,15 @@ use Psr\Http\Message\ResponseInterface;
 class Mailru extends AbstractProvider
 {
     /**
-     * Get authorization url to begin OAuth flow
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getBaseAuthorizationUrl()
     {
         return 'https://connect.mail.ru/oauth/authorize';
     }
 
-
     /**
-     * Get access token url to retrieve token
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getBaseAccessTokenUrl(array $params)
     {
@@ -31,9 +26,17 @@ class Mailru extends AbstractProvider
     }
 
     /**
-     * Get default scopes
-     *
-     * @return array
+     * {@inheritdoc}
+     */
+    public function getResourceOwnerDetailsUrl(AccessToken $token)
+    {
+        $param = 'app_id=' . $this->clientId . '&method=users.getInfo&secure=1&session_key=' . $token->getToken();
+        $sign = md5(str_replace('&', '', $param) . $this->clientSecret);
+        return 'http://www.appsmail.ru/platform/api?' . $param . '&sig=' . $sign;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     protected function getDefaultScopes()
     {
@@ -41,46 +44,23 @@ class Mailru extends AbstractProvider
     }
 
     /**
-     * Check a provider response for errors.
-     *
-     * @throws IdentityProviderException
-     * @param  ResponseInterface $response
-     * @return void
+     * {@inheritdoc}
      */
     protected function checkResponse(ResponseInterface $response, $data)
     {
-        if (isset($data['error'])) {
-            throw new IdentityProviderException(
-                (isset($data['error']['message']) ? $data['error']['message'] : $response->getReasonPhrase()),
-                $response->getStatusCode(),
-                $response
-            );
+        if (isset($data['error_code'])) {
+            throw new IdentityProviderException($data['error_msg'], $data['error_code'], $response);
+        } elseif (isset($data['error'])) {
+            throw new IdentityProviderException($data['error'],
+                $response->getStatusCode(), $response);
         }
     }
 
     /**
-     * Generate a user object from a successful user details request.
-     *
-     * @param array $response
-     * @param AccessToken $token
-     * @return \League\OAuth2\Client\Provider\UserInterface
+     * {@inheritdoc}
      */
     protected function createResourceOwner(array $response, AccessToken $token)
     {
         return new MailruResourceOwner($response);
-    }
-
-    /**
-     * Get provider url to fetch user details
-     *
-     * @param  AccessToken $token
-     *
-     * @return string
-     */
-    public function getResourceOwnerDetailsUrl(AccessToken $token)
-    {
-        $param = 'app_id=' . $this->clientId . '&method=users.getInfo&secure=1&session_key=' . $token;
-        $sign = md5( str_replace('&', '', $param) . $this->clientSecret );
-        return 'http://www.appsmail.ru/platform/api?' . $param . '&sig=' . $sign;
     }
 }
